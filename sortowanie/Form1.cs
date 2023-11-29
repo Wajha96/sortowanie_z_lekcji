@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -104,97 +105,153 @@ namespace sortowanie
         }
         private void button1_Click(object sender, EventArgs e)
         {
-            int[] wylosowane = new int[100];
-            int[] rosnace = new int[100];
-            int[] malejace = new int[100];
-            
+            int wielkosc = 10000;
+            int[] wylosowane = new int[wielkosc];
+            int[] rosnace = new int[wielkosc];
+            int[] malejace = new int[wielkosc];
+            chart1.ChartAreas.First().AxisY.LabelStyle.Format = "0ms";
 
-
-            chart1.Series.Clear();
-            chart1.Series.Add(series);
 
             //start
-            if (checkBox1.Checked)
+            if (this.rosnace.Checked)
             {
-                
+                //rosnace
+                for(int i = 1; i < wielkosc; i++)
+                {
+                    rosnace[i] = i;
+                }
             }
-            if (checkBox2.Checked)
+            if (this.malejace.Checked)
             {
-
+                //malejace
+                for (int i = wielkosc - 1; i > 0; i--)
+                {
+                    malejace[i] = i;
+                }
             }
-            if (checkBox3.Checked)
+            if (losowe.Checked)
             {
 
                 //losowe
                 Random rnd = new Random();
 
                 int poczatek = 0;
-                int koniec = 100;
-                for (int i = 0; i < 99; i++)
+                int koniec = 1000;
+                for (int i = 0; i < wielkosc - 1; i++)
                 {
 
                     wylosowane[i] = rnd.Next(poczatek, koniec); // dla przedziału 0-10
  
                 }
             }
-            if (checkBox4.Checked)
+            if (babelkowe.Checked)
             {
                
-                //bombelkowe
-                if (checkBox1.Checked)
-                { 
 
-                }
-                if (checkBox2.Checked)
+                int[] liczby = new int[wielkosc];
+                //bąbelkowe
+                if (this.rosnace.Checked)
                 {
-
-                }
-                if (checkBox3.Checked)
-                {
-                    //tablica tablic
-                    int[] ciag = new int[3];
-                    int[] liczby = new int[100];
-                }
-                    int n = wylosowane.Length;
-                    for (int i = 0; i < n - 1; i++)
+                chart1.Series.Clear();
+                chart1.Series.Add(series);
+                chart1.Series.First().Name = "Bąbelkowe_Rosnace";
+                    for (int i = 0; i < wielkosc; i++)
                     {
+                        liczby[i] = rosnace[i];
+                    }
+                    int start, stop;
+                    start = Environment.TickCount & int.MaxValue;
+                    for (int i = 0; i < wielkosc - 1; i++)
+                        {
                    
-                        for (int j = 0; j < n - i - 1; j++)
-                            if (wylosowane[j] > wylosowane[j + 1])
+                            for (int j = 0; j < wielkosc - i - 1; j++)
+                                if (liczby[j] > liczby[j + 1])
+                                {
+                                    int temp = liczby[j];
+                                    liczby[j] = liczby[j + 1];
+                                    liczby[j + 1] = temp;
+
+                                }
+                        }
+                    stop = Environment.TickCount & int.MaxValue;
+                    series.Points.Add(stop - start);
+                    
+                }
+                if (this.malejace.Checked)
+                {
+                    chart1.Series.Clear();
+                    chart1.Series.Add(series);
+                    chart1.Series.First().Name = "Bąbelkowe_malejace";
+                    for (int i = 0; i < wielkosc; i++)
+                    {
+                        liczby[i] = malejace[i];
+                    }
+                    int start, stop;
+                    start = Environment.TickCount & int.MaxValue;
+                    for (int i = 0; i < wielkosc - 1; i++)
+                    {
+
+                        for (int j = 0; j < wielkosc - i - 1; j++)
+                            if (liczby[j] > liczby[j + 1])
                             {
-                                int temp = wylosowane[j];
-                                wylosowane[j] = wylosowane[j + 1];
-                                wylosowane[j + 1] = temp;
+                                int temp = liczby[j];
+                                liczby[j] = liczby[j + 1];
+                                liczby[j + 1] = temp;
 
                             }
                     }
-                    for (int k = 0;k < 99;k++)
+                    stop = Environment.TickCount & int.MaxValue;
+                    series.Points.Add(stop - start);
+                }
+                if (losowe.Checked)
+                {
+                    for (int i = 0; i < wielkosc; i++)
                     {
-                        series.Points.Add(wylosowane[k]);
+                        liczby[i] = wylosowane[i];
                     }
+                    int start, stop;
+                    start = Environment.TickCount & Int32.MaxValue;
+                    for (int i = 0; i < wielkosc - 1; i++)
+                    {
+
+                        for (int j = 0; j < wielkosc - i - 1; j++)
+                            if (liczby[j] > liczby[j + 1])
+                            {
+                                int temp = liczby[j];
+                                liczby[j] = liczby[j + 1];
+                                liczby[j + 1] = temp;
+
+                            }
+                    }
+                    stop = Environment.TickCount & Int32.MaxValue;
+                    series.Points.Add(stop - start);
+                }
+             
 
 
-               
+
+
+
+
             }
-            if (checkBox5.Checked)
+            if (przez_wybor.Checked)
             {
                 //przez wybor
-                if (checkBox1.Checked)
+                if (this.rosnace.Checked)
                 {
 
                 }
-                if (checkBox2.Checked)
+                if (this.malejace.Checked)
                 {
 
                 }
-                if (checkBox3.Checked)
+                if (losowe.Checked)
                 {
-                    int n = wylosowane.Length;
-                    for (int i = 0; i < n - 1; i++)
+                    for (int i = 0; i < wielkosc - 1; i++)
                     {
                     
                         int min_idx = i;
-                        for (int j = i + 1; j < n; j++)
+                        for (int j = i + 1; j < wielkosc; j++)
                             if (wylosowane[j] < wylosowane[min_idx])
                                 min_idx = j;
 
@@ -211,15 +268,15 @@ namespace sortowanie
                 }
 
             }
-            if (checkBox6.Checked)
+            if (przez_wstawianie.Checked)
             {
 
             }
-            if (checkBox7.Checked)
+            if (szybkie.Checked)
             {
 
             }
-            if (checkBox8.Checked)
+            if (przez_scalanie.Checked)
             {
 
             }
