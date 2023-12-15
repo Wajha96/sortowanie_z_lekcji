@@ -13,7 +13,7 @@ namespace sortowanie
         {
             get
             {
-                if (start == null && stop != null)
+                if (start != null && stop != null)
                 {
                     return (stop - start).TotalMilliseconds;
                 }
@@ -23,7 +23,7 @@ namespace sortowanie
                 }
             }
         }
-        public static void BubbleSort(int[] liczby)
+        public void BubbleSort(int[] liczby)
         {
             start = DateTime.Now;
             for (int i = 0; i < liczby.Length - 1; i++)

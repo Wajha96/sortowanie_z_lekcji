@@ -15,7 +15,7 @@ namespace sortowanie
         {
             if (start != null && stop != null)
             {
-                return (stop - start).TotalMilliseconds;
+                return 1+ (stop - start).TotalMilliseconds;
             }
             else
             {

@@ -42,8 +42,8 @@
             this.babelkowe = new System.Windows.Forms.CheckBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.losowe = new System.Windows.Forms.CheckBox();
-            this.malejace = new System.Windows.Forms.CheckBox();
-            this.rosnace = new System.Windows.Forms.CheckBox();
+            this.spadajace = new System.Windows.Forms.CheckBox();
+            this.zwiekszajace = new System.Windows.Forms.CheckBox();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -104,6 +104,7 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Rodzaj sortowania";
+            this.groupBox2.Enter += new System.EventHandler(this.groupBox2_Enter_1);
             // 
             // przez_scalanie
             // 
@@ -163,8 +164,8 @@
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.losowe);
-            this.groupBox1.Controls.Add(this.malejace);
-            this.groupBox1.Controls.Add(this.rosnace);
+            this.groupBox1.Controls.Add(this.spadajace);
+            this.groupBox1.Controls.Add(this.zwiekszajace);
             this.groupBox1.Location = new System.Drawing.Point(3, 3);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(170, 100);
@@ -184,27 +185,27 @@
             this.losowe.UseVisualStyleBackColor = true;
             this.losowe.CheckedChanged += new System.EventHandler(this.checkBox3_CheckedChanged);
             // 
-            // malejace
+            // spadajace
             // 
-            this.malejace.AutoSize = true;
-            this.malejace.Location = new System.Drawing.Point(63, 54);
-            this.malejace.Name = "malejace";
-            this.malejace.Size = new System.Drawing.Size(69, 17);
-            this.malejace.TabIndex = 1;
-            this.malejace.Text = "Malejace";
-            this.malejace.UseVisualStyleBackColor = true;
-            this.malejace.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
+            this.spadajace.AutoSize = true;
+            this.spadajace.Location = new System.Drawing.Point(63, 54);
+            this.spadajace.Name = "spadajace";
+            this.spadajace.Size = new System.Drawing.Size(69, 17);
+            this.spadajace.TabIndex = 1;
+            this.spadajace.Text = "Malejace";
+            this.spadajace.UseVisualStyleBackColor = true;
+            this.spadajace.CheckedChanged += new System.EventHandler(this.checkBox2_CheckedChanged);
             // 
-            // rosnace
+            // zwiekszajace
             // 
-            this.rosnace.AutoSize = true;
-            this.rosnace.Location = new System.Drawing.Point(63, 30);
-            this.rosnace.Name = "rosnace";
-            this.rosnace.Size = new System.Drawing.Size(69, 17);
-            this.rosnace.TabIndex = 0;
-            this.rosnace.Text = "Rosnace";
-            this.rosnace.UseVisualStyleBackColor = true;
-            this.rosnace.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            this.zwiekszajace.AutoSize = true;
+            this.zwiekszajace.Location = new System.Drawing.Point(63, 30);
+            this.zwiekszajace.Name = "zwiekszajace";
+            this.zwiekszajace.Size = new System.Drawing.Size(69, 17);
+            this.zwiekszajace.TabIndex = 0;
+            this.zwiekszajace.Text = "Rosnace";
+            this.zwiekszajace.UseVisualStyleBackColor = true;
+            this.zwiekszajace.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // chart1
             // 
@@ -259,7 +260,7 @@
         private System.Windows.Forms.CheckBox babelkowe;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.CheckBox losowe;
-        private System.Windows.Forms.CheckBox malejace;
-        private System.Windows.Forms.CheckBox rosnace;
+        private System.Windows.Forms.CheckBox spadajace;
+        private System.Windows.Forms.CheckBox zwiekszajace;
     }
 }
