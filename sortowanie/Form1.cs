@@ -14,14 +14,13 @@ namespace sortowanie
 {
     public partial class Form1 : Form
     {
-        Series series = new Series();
+      
         public Form1()
         {
             InitializeComponent();
             chart1.Series.Clear();
   
-            chart1.Series.Add(series);
-       
+          
         }
 
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -104,6 +103,8 @@ namespace sortowanie
         }
         private void button1_Click(object sender, EventArgs e)
         {
+            chart1.Series.Clear();
+            
             int wielkosc = 10000;
             int[] wylosowane = new int[wielkosc];
             int[] rosnace = new int[wielkosc];
@@ -131,18 +132,17 @@ namespace sortowanie
                 Random rnd = new Random();
 
                 int poczatek = 0;
-                int koniec = 1000;
+                int koniec = wielkosc*2;
                 for (int i = 0; i < wielkosc - 1; i++)
                 {
-
                     wylosowane[i] = rnd.Next(poczatek, koniec);
- 
                 }
             }
 
             if (babelkowe.Checked)
             {
                 Babelkowe b = new Babelkowe();
+                
                 if (zwiekszajace.Checked)
                 {
                     b.BubbleSort(rosnace);
@@ -247,7 +247,7 @@ namespace sortowanie
             {
 
             }
-            
+
 
         }
 
