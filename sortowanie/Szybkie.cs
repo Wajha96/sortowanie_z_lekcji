@@ -7,43 +7,37 @@ using System.Windows.Forms.DataVisualization.Charting;
 
 namespace sortowanie
 {
-    internal class Szybkie
+    internal class Szybkie : Czas
     {
-        private static DateTime start, stop;
-        public Double Duration
+        public void QuickSort(int[] liczby, int left, int right)
         {
-            get 
+            int[] dos = new int[liczby.Length];
+            for (int k = 0; k < liczby.Length; k++)
             {
-                if (start == null && stop != null)
-                {
-                    return (stop - start).TotalMilliseconds;
-                }
-                else
-                {
-                    return 0;
-                }
+                dos[k] = liczby[k];
             }
+            StartCount();
+            QuickSortv2(dos, left, right);
+            StopCount();
         }
-        public static void QuickSort(int[] liczby, int left, int right)
+        public void QuickSortv2(int[] szybkieliczby, int left, int right)
         {
-            start = DateTime.Now;
             int i = left;
             int j = right;
-            int pivot = liczby[(left + right) / 2];
+            int pivot = szybkieliczby[(left + right) / 2];
             while (i<j)
             {
-                  while (liczby[i] < pivot) i++;
-                  while (liczby[j] > pivot) j--;
+                  while (szybkieliczby[i] < pivot) i++;
+                  while (szybkieliczby[j] > pivot) j--;
                   if (i <= j)
                   {
-                        int tmp = liczby[i];
-                        liczby[i++] = liczby[j];
-                        liczby[j--] = tmp;
+                        int tmp = szybkieliczby[i];
+                        szybkieliczby[i++] = szybkieliczby[j];
+                        szybkieliczby[j--] = tmp;
                   }
             }
-            if (left < j) QuickSort(liczby, left, j);
-            if (i < right) QuickSort(liczby, i, right);
-            stop = DateTime.Now;
+            if (left < j) QuickSortv2(szybkieliczby, left, j);
+            if (i < right) QuickSortv2(szybkieliczby, i, right);
         }
     }
 }

@@ -3,43 +3,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace sortowanie
 {
-    internal class PrzezWybor
+    internal class PrzezWybor : Czas
     {
-        private static DateTime start, stop;
-        public Double Duration
+      
+        public void BySelection(int[] liczby)
         {
-            get
+            int[] dos = new int[liczby.Length];
+            for (int k = 0; k < liczby.Length; k++)
             {
-                if (start == null && stop != null)
-                {
-                    return (stop - start).TotalMilliseconds;
-                }
-                else
-                {
-                    return 0;
-                }
+                dos[k] = liczby[k];
             }
-        }
-        public static void BySelection(int[] liczby)
-        {
-            start = DateTime.Now;
+            StartCount();
             for (int i = 0; i < liczby.Length - 1; i++)
             {
 
                 int min_idx = i;
                 for (int j = i + 1; j < liczby.Length; j++)
-                    if (liczby[j] < liczby[min_idx])
+                    if (dos[j] < dos[min_idx])
                         min_idx = j;
 
 
-                int temp = liczby[min_idx];
-                liczby[min_idx] = liczby[i];
-                liczby[i] = temp;
+                int temp = dos[min_idx];
+                dos[min_idx] = dos[i];
+                dos[i] = temp;
             }
-            stop = DateTime.Now;
+            StopCount();
         }
     }
 }

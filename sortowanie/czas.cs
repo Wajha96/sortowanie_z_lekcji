@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace sortowanie
 {
-    abstract public class czas
+    internal class Czas
     {
         private DateTime start, stop;
         public Double Duration
@@ -22,6 +22,16 @@ namespace sortowanie
                     return 0;
                 }
             }
+        }
+
+        public void StartCount()
+        {
+            start = DateTime.Now;
+        }
+
+        public void StopCount()
+        {
+            stop = DateTime.Now;
         }
     }
 }
