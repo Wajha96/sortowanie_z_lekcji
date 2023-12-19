@@ -104,8 +104,28 @@ namespace sortowanie
         private void button1_Click(object sender, EventArgs e)
         {
             chart1.Series.Clear();
-            
-            int wielkosc = 10000;
+            int wielkosc = 0;
+            if (!zwiekszajace.Checked && !spadajace.Checked && !losowe.Checked)
+            {
+                MessageBox.Show("Wybierz typ ciagu");
+                return;
+            }
+            if (!babelkowe.Checked && !przez_wybor.Checked && !przez_wstawianie.Checked && !szybkie.Checked && !przez_scalanie.Checked)
+            {
+                MessageBox.Show("Wybierz algorytm sortowania");
+                return;
+            }
+
+            if (!int.TryParse(textBox1.Text, out wielkosc))
+            {
+                MessageBox.Show("Wpisz ilosc liczb");
+                return;
+            }
+            else
+            {
+                wielkosc = Convert.ToInt32(textBox1.Text);
+            }
+
             int[] wylosowane = new int[wielkosc];
             int[] rosnace = new int[wielkosc];
             int[] malejace = new int[wielkosc];
@@ -146,21 +166,21 @@ namespace sortowanie
                 if (zwiekszajace.Checked)
                 {
                     b.BubbleSort(rosnace);
-                    Series br = new Series("babelkowe-rosnace");
+                    Series br = new Series("babelkowe-rosnace" + b.Duration + "ms");
                     br.Points.Add(b.Duration);
                     chart1.Series.Add(br);
                 }
                 if (spadajace.Checked)
                 {
                     b.BubbleSort(malejace);
-                    Series bm = new Series("babelkowe-malejace");
+                    Series bm = new Series("babelkowe-malejace" + b.Duration + "ms");
                     bm.Points.Add(b.Duration);
                     chart1.Series.Add(bm);
                 }
                 if (losowe.Checked)
                 {
                     b.BubbleSort(wylosowane);
-                    Series bs = new Series("babelkowe-wylosowane");
+                    Series bs = new Series("babelkowe-wylosowane " + b.Duration + "ms");
                     bs.Points.Add(b.Duration);
                     chart1.Series.Add(bs);
                 }
@@ -173,21 +193,21 @@ namespace sortowanie
                 if (zwiekszajace.Checked)
                 {
                     wyb.BySelection(rosnace);
-                    Series wybr = new Series("wybor-rosnace");
+                    Series wybr = new Series("wybor-rosnace" + wyb.Duration + "ms");
                     wybr.Points.Add(wyb.Duration);
                     chart1.Series.Add(wybr);
                 }
                 if (spadajace.Checked)
                 {
                     wyb.BySelection(malejace);
-                    Series wybm = new Series("wybor-malejace");
+                    Series wybm = new Series("wybor-malejace" + wyb.Duration + "ms");
                     wybm.Points.Add(wyb.Duration);
                     chart1.Series.Add(wybm);
                 }
                 if (losowe.Checked)
                 {
                     wyb.BySelection(wylosowane);
-                    Series wybs = new Series("wybor-wylosowane");
+                    Series wybs = new Series("wybor-wylosowane" + wyb.Duration + "ms");
                     wybs.Points.Add(wyb.Duration);
                     chart1.Series.Add(wybs);
                 }
@@ -199,53 +219,74 @@ namespace sortowanie
                 if (zwiekszajace.Checked)
                 {
                     wst.InsertionSort(rosnace);
-                    Series wr = new Series("wstawianie-rosnancy");
+                    Series wr = new Series("wstawianie-rosnancy" + wst.Duration + "ms");
                     wr.Points.Add(wst.Duration);
                     chart1.Series.Add(wr);
                 }
                 if (spadajace.Checked)
                 {
                     wst.InsertionSort(malejace);
-                    Series wm = new Series("wstawianie-malejace");
+                    Series wm = new Series("wstawianie-malejace" + wst.Duration + "ms");
                     wm.Points.Add(wst.Duration);
                     chart1.Series.Add(wm);
                 }
                 if (losowe.Checked)
                 {
                     wst.InsertionSort(wylosowane);
-                    Series ws = new Series("wstawianie-wylosowane");
+                    Series ws = new Series("wstawianie-wylosowane" + wst.Duration + "ms");
                     ws.Points.Add(wst.Duration);
                     chart1.Series.Add(ws);
                 }
             }
             if (szybkie.Checked)
             {
-                Szybkie s = new Szybkie();
+                Szybkie sz = new Szybkie();
                 if (zwiekszajace.Checked)
                 { 
-                    s.QuickSort(rosnace, 0, wielkosc - 1);
-                    Series sr = new Series("szybkie-rosnace");
-                    sr.Points.Add(s.Duration);
-                    chart1.Series.Add(sr);
+                    sz.QuickSort(rosnace, 0, wielkosc - 1);
+                    Series szr = new Series("szybkie-rosnace" + sz.Duration + "ms");
+                    szr.Points.Add(sz.Duration);
+                    chart1.Series.Add(szr);
                 }
                 if (spadajace.Checked)
                 {
-                    s.QuickSort(malejace, 0, wielkosc - 1);
-                    Series sm = new Series("szybkie-malejace");
-                    sm.Points.Add(s.Duration);
-                    chart1.Series.Add(sm);
+                    sz.QuickSort(malejace, 0, wielkosc - 1);
+                    Series szm = new Series("szybkie-malejace" + sz.Duration + "ms");
+                    szm.Points.Add(sz.Duration);
+                    chart1.Series.Add(szm);
                 }
                 if (losowe.Checked)
                 {
-                    s.QuickSort(wylosowane, 0, wielkosc - 1);
-                    Series ss = new Series("szybkie-losowe");
-                    ss.Points.Add(s.Duration);
-                    chart1.Series.Add(ss);
+                    sz.QuickSort(wylosowane, 0, wielkosc - 1);
+                    Series szs = new Series("szybkie-losowe" + sz.Duration + "ms");
+                    szs.Points.Add(sz.Duration);
+                    chart1.Series.Add(szs);
                 }
             }
             if (przez_scalanie.Checked)
             {
-
+                Scalanie sc = new Scalanie();
+                if (zwiekszajace.Checked)
+                {
+                    sc.MergingSortMian(rosnace, 0, wielkosc - 1);
+                    Series scr = new Series("scalanie-rosnace" + sc.Duration + "ms");
+                    scr.Points.Add(sc.Duration);
+                    chart1.Series.Add(scr);
+                }
+                if (spadajace.Checked)
+                {
+                    sc.MergingSortMian(malejace, 0, wielkosc - 1);
+                    Series scm = new Series("scalanie-malejace" + sc.Duration + "ms");
+                    scm.Points.Add(sc.Duration);
+                    chart1.Series.Add(scm);
+                }
+                if (losowe.Checked)
+                {
+                    sc.MergingSortMian(wylosowane, 0, wielkosc - 1);
+                    Series scs = new Series("scalanie-losowe" + sc.Duration + "ms");
+                    scs.Points.Add(sc.Duration);
+                    chart1.Series.Add(scs);
+                }
             }
 
 
@@ -257,6 +298,11 @@ namespace sortowanie
         }
 
         private void groupBox2_Enter_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
         {
 
         }
